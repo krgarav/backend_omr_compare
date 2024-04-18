@@ -33,7 +33,6 @@ const uploadCsv = (req, res, next) => {
         const secondInputCsvFile = req.files["secondInputCsvFile"] ? req.files["secondInputCsvFile"][0] : null;
 
         // Call next middleware (csvUpload function) after upload is complete
-        // console.log(req.file)
 
         req.uploadedFiles = {
             firstInputCsvFile,
