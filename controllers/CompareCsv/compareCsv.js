@@ -38,7 +38,7 @@ const compareCsv = async (req, res) => {
                         if (!skippingKey.includes(key)) {
 
                             const obj = {
-                                "PRIMARY": f1[i][primaryKey],
+                                "PRIMARY": ` ${f1[i][primaryKey]}`,
                                 "COLUMN_NAME": key,
                                 "FILE_1_DATA": val1,
                                 "FILE_2_DATA": val2,
@@ -73,7 +73,7 @@ const compareCsv = async (req, res) => {
         }
 
     }
-    console.log(diff)
+
 
 
 
@@ -86,7 +86,10 @@ const compareCsv = async (req, res) => {
     // res.set('Content-Disposition', 'attachment; filename="data.csv"');
 
     // Send the CSV data as the response
-    res.status(200).send(diff);
+    res.status(200).send({
+        csvFile: f1,
+        data: diff
+    });
 }
 
 module.exports = compareCsv;
