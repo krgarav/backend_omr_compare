@@ -24,7 +24,10 @@ const compareCsv = async (req, res) => {
     const diff = [];
     for (let i = 0; i < f1.length; i++) {
         for (let j = 0; j < f2.length; j++) {
-            if (f1[i][primaryKey] === f2[j][primaryKey] && f1[i][primaryKey] !== "       " && f2[i][primaryKey] !== "       ") {
+            const pkLength = f1[i][primaryKey].length;
+            const str = " ".repeat(pkLength);
+
+            if (f1[i][primaryKey] === f2[j][primaryKey] && f1[i][primaryKey] !== str && f2[i][primaryKey] !== str) {
                 for (let [key, value] of Object.entries(f1[i])) {
                     if (value !== f2[j][key]) {
                         const val1 = value;
@@ -35,7 +38,7 @@ const compareCsv = async (req, res) => {
                         if (!skippingKey.includes(key)) {
 
                             const obj = {
-                                "PRIMARY": primaryKey,
+                                "PRIMARY": f1[i][primaryKey],
                                 "COLUMN_NAME": key,
                                 "FILE_1_DATA": val1,
                                 "FILE_2_DATA": val2,
@@ -45,7 +48,7 @@ const compareCsv = async (req, res) => {
                         }
                     }
                 }
-            } else if (f1[i][primaryKey] === "       " && f2[i][primaryKey] !== "       " && i === j) {
+            } else if (f1[i][primaryKey] === str && f2[i][primaryKey] !== str && i === j) {
                 for (let [key, value] of Object.entries(f1[i])) {
                     if (value !== f2[j][key]) {
                         const val1 = value;
@@ -56,7 +59,7 @@ const compareCsv = async (req, res) => {
                         if (!skippingKey.includes(key)) {
 
                             const obj = {
-                                "PRIMARY": primaryKey,
+                                "PRIMARY": f1[i][primaryKey],
                                 "COLUMN_NAME": key,
                                 "FILE_1_DATA": val1,
                                 "FILE_2_DATA": val2,
@@ -70,7 +73,7 @@ const compareCsv = async (req, res) => {
         }
 
     }
-    // console.log(diff)
+    console.log(diff)
 
 
 
