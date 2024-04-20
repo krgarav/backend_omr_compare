@@ -8,8 +8,6 @@ const handleData = require("../controllers/Templete/handleData");
 const getCsvData = require("../controllers/Templete/getCsvData");
 const getImage = require("../controllers/Templete/getImage");
 
-const uploadCsv = require("../controllers/CompareCsv/uploadCsv")
-const multerUpload = require("../middleware/multerUpload");
 const router = express.Router();
 
 router.get("/get/templetes", getTemplete);
@@ -23,6 +21,6 @@ router.post("/upload/:id", handleUpload); //templeteId
 router.post("/data", handleData); 
 
 
-// router.post("/uploadcsv", multerUpload, uploadCsv);
+
 
 module.exports = router;

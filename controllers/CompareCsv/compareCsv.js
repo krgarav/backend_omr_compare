@@ -1,23 +1,23 @@
 const path = require("path");
 const fs = require("fs");
-
-// const csvParser = require("../../services/csvparser");
-const csvParser = require("csv-parser");
 const csvToJson = require("../../services/csvExtractor");
-const XLSX = require('xlsx');
 const compareCsv = async (req, res) => {
 
     // Access other form data parameters
-    const firstInputFileName = req.body.firstInputFileName;
-    const secondInputFileName = req.body.secondInputFileName;
-    const primaryKey = req.body.primaryKey;
-    const skippingKey = req.body.skippingKey;
-    const imageColName = req.body.imageColName;
+
+    const { firstInputFileName, secondInputFileName, primaryKey, skippingKey, imageColName } = req.body;
+    // const firstInputFileName = req.body.firstInputFileName;
+    // const secondInputFileName = req.body.secondInputFileName;
+    // const primaryKey = req.body.primaryKey;
+    // const skippingKey = req.body.skippingKey;
+    // const imageColName = req.body.imageColName;
+
+
     const firstCSVFile = req.uploadedFiles.firstInputCsvFile
     const secondCSVFile = req.uploadedFiles.secondInputCsvFile
     const firstFilePath = path.join(__dirname, "../", "../", "multipleCsvCompare", firstInputFileName);
     const secondFilePath = path.join(__dirname, "../", "../", "multipleCsvCompare", secondInputFileName);
-
+console.log(firstCSVFile);
     const f1 = await csvToJson(firstFilePath)
     const f2 = await csvToJson(secondFilePath)
 
